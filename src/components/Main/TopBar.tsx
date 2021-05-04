@@ -3,12 +3,14 @@ import { FaArrowCircleLeft, FaInfoCircle } from "react-icons/fa";
 import styled from "styled-components";
 import { MessengerContext } from "../../context/context";
 import SearchBar from "../Main/SearchBar";
+import useWindowDimensions from "../WindowSize";
 
 export default function TopBar() {
   const {
     profiles,
     selected,
     setShowRightSide,
+    setShowLeftSide,
     showSearchBar,
     setShowMain,
   } = useContext(MessengerContext);
@@ -16,9 +18,12 @@ export default function TopBar() {
     (pro) => pro.id === selected
   )!;
 
+  const { width } = useWindowDimensions();
+
   const handleClick = () => {
     setShowMain!(false);
-    document.querySelector("aside")!.style.transform = "";
+
+    if (width < 600) setShowLeftSide!(true);
   };
   return (
     <>

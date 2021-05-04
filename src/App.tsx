@@ -27,6 +27,7 @@ const AppStyles = styled.div`
 
   @media (max-width: 600px) {
     width: 100vw;
+    overflow: hidden;
     > aside,
     > div {
       position: absolute;

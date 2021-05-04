@@ -44,8 +44,8 @@ const RightSideStyles = styled.aside<Props>`
   }
 
   img {
-    width: 5rem;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
   }
 
   ul.first-list {
@@ -69,6 +69,8 @@ const RightSideStyles = styled.aside<Props>`
   }
 
   @media (max-width: 600px) {
+    padding: 3rem 1.5rem;
+
     > span {
       display: block;
       position: absolute;
@@ -76,6 +78,14 @@ const RightSideStyles = styled.aside<Props>`
       top: 1rem;
       font-size: 1.5rem;
       cursor: pointer;
+    }
+
+    ul.first-list {
+      font-size: 1.2rem;
+    }
+
+    > h4 {
+      font-size: 1.25rem;
     }
   }
 `;

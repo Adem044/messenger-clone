@@ -44,9 +44,7 @@ export default function Main() {
   return (
     <MainStyles showMain={showMain!}>
       <TopBar />
-      <article
-        style={{ height: showSearchBar ? "calc(100% - 4rem - 111px)" : "" }}
-      >
+      <article className={showSearchBar ? "minus" : undefined}>
         <div className="medium">
           {conversation.map((conv, idx) => (
             <Medium
@@ -79,7 +77,8 @@ const MainStyles = styled.div<Props>`
 
   /* z-index: ${({ showMain }) => (showMain ? "4" : "-1")}; */
 
-  transform: ${({ showMain }) => (showMain ? "" : "translateX(100%)")};
+  transform: ${({ showMain }) =>
+    showMain ? "translateX(0%)" : "translateX(-100%)"};
 
   transition: all 0.2s ease-in-out;
 
@@ -87,6 +86,10 @@ const MainStyles = styled.div<Props>`
     height: calc(100% - 4rem - 72px);
     display: block;
     overflow-y: auto;
+
+    &.minus {
+      height: calc(100% - 4rem - 111px);
+    }
 
     .medium {
       min-height: 100%;
@@ -97,6 +100,16 @@ const MainStyles = styled.div<Props>`
       justify-content: flex-end;
       row-gap: 0.5rem;
       padding: 0.5rem 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    article {
+      height: calc(100% - 3rem - 72px);
+
+      &.minus {
+        height: calc(100% - 3rem - 111px);
+      }
     }
   }
 `;

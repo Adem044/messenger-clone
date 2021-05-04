@@ -22,9 +22,13 @@ export default function Conversation({
   profile,
   seen,
 }: ConversationProps) {
-  const { selected, setSelected, setProfiles, setShowMain } = useContext(
-    MessengerContext
-  );
+  const {
+    selected,
+    setSelected,
+    setProfiles,
+    setShowMain,
+    setShowLeftSide,
+  } = useContext(MessengerContext);
 
   const { width } = useWindowDimensions();
 
@@ -47,8 +51,7 @@ export default function Conversation({
       return newPrev;
     });
 
-    if (width < 600)
-      document.querySelector("aside")!.style.transform = "translateX(-100%)";
+    if (width < 600) setShowLeftSide!(false);
   };
 
   return (

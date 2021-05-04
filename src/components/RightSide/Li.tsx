@@ -5,6 +5,7 @@ import Modal from "../Modal";
 import Picker from "./Picker";
 import EditNicknames from "./EditNicknames";
 import { MessengerContext } from "../../context/context";
+import useWindowDimensions from "../WindowSize";
 
 interface Props {
   li: string;
@@ -44,6 +45,8 @@ export default function Li({ li, id }: Props) {
 
   const prevTheme = useRef<string>(theme!);
   const prevEmoji = useRef<JSX.Element>(emoji!);
+
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     prevTheme.current = theme!;
@@ -129,7 +132,7 @@ export default function Li({ li, id }: Props) {
                   key={list.id}
                   onClick={() => {
                     setShowSearchBar!((prev) => !prev);
-                    setShowRightSide!(false);
+                    if (width < 600) setShowRightSide!(false);
                   }}
                 >
                   {list.icon()} {list.text}

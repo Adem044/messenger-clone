@@ -16,7 +16,7 @@ export default function SimpleConv({
   id,
   setSearch,
 }: SimpleConvProps) {
-  const { setSelected, setShowMain, setProfiles } = useContext(
+  const { setSelected, setShowMain, setProfiles, setShowLeftSide } = useContext(
     MessengerContext
   );
 
@@ -35,8 +35,7 @@ export default function SimpleConv({
       return newPrev;
     });
 
-    if (width < 600)
-      document.querySelector("aside")!.style.transform = "translateX(-100%)";
+    if (width < 600) setShowLeftSide!(false);
     setSearch("");
   };
   return (

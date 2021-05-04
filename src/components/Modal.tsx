@@ -23,7 +23,8 @@ const ModalStyles = styled.div`
   background-color: white;
   z-index: 5;
   align-items: center;
-  width: max-content;
+  max-width: 90%;
+
   padding: 1.5rem 0;
   top: 50%;
   left: 50%;
@@ -86,13 +87,15 @@ const ModalStyles = styled.div`
     padding: 0 2rem;
     justify-content: flex-end;
     column-gap: 1rem;
+    margin-top: 2rem;
 
     button {
-      padding: 0.75rem 1.75rem;
+      padding: 0.75em 1.75em;
       cursor: pointer;
       border-radius: 6px;
       background-color: rgb(245, 245, 245);
       font-weight: bolder;
+      font-size: 1rem;
 
       &:last-of-type {
         background-color: #0099ff;
@@ -109,19 +112,17 @@ const ModalStyles = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      line-height: 2.5rem;
-      min-height: 40px;
+      line-height: 3rem;
+      min-height: 48px;
+      font-size: 1.2rem;
 
       img {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: center;
+        width: 2.75rem;
+        height: 2.75rem;
       }
 
       .edit {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         cursor: pointer;
       }
 
@@ -219,6 +220,16 @@ const ModalStyles = styled.div`
       font-size: 1rem;
       color: #1a2929;
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 600px) {
+    min-width: 75%;
+
+    div.columns {
+      h1 {
+        font-size: 1.75rem;
+      }
     }
   }
 `;

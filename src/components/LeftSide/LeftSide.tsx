@@ -8,14 +8,14 @@ import TopBar from "./TopBar";
 
 export default function LeftSide() {
   const [search, setSearch] = useState("");
-  const { profiles } = useContext(MessengerContext);
+  const { profiles, showLeftSide } = useContext(MessengerContext);
 
   const filteredProfiles = profiles?.filter((pro) =>
     pro.profile.toLocaleLowerCase().includes(search.toLocaleLowerCase())
   );
 
   return (
-    <LeftSideStyles>
+    <LeftSideStyles show={showLeftSide!}>
       <TopBar />
       <SearchBar search={search} setSearch={setSearch} />
       {search
@@ -27,13 +27,18 @@ export default function LeftSide() {
   );
 }
 
-const LeftSideStyles = styled.aside`
+interface Props {
+  show: boolean;
+}
+
+const LeftSideStyles = styled.aside<Props>`
   padding: 1rem 0;
   flex-basis: 20rem;
   background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  transform: ${({ show }) => (show ? "translateX(0%)" : "translateX(-100%)")};
   transition: all 0.2s ease-in-out;
 
   .top-bar,

@@ -34,12 +34,14 @@ interface Context {
   conversations: Conversation[];
   showSearchBar: boolean;
   showRightSide: boolean;
+  showLeftSide: boolean;
   showMain: boolean;
   selected: number;
   setProfiles: UseState<Profile[]>;
   setConversations: UseState<Conversation[]>;
   setSelected: UseState<number>;
   setShowRightSide: UseState<boolean>;
+  setShowLeftSide: UseState<boolean>;
   setShowSearchBar: UseState<boolean>;
   setShowMain: UseState<boolean>;
 }
@@ -59,6 +61,7 @@ export const Provider = ({ children }: Props) => {
   );
   const [selected, setSelected] = useState(0);
   const [showRightSide, setShowRightSide] = useState(false);
+  const [showLeftSide, setShowLeftSide] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [showMain, setShowMain] = useState(false);
 
@@ -79,12 +82,14 @@ export const Provider = ({ children }: Props) => {
         selected,
         showSearchBar,
         showRightSide,
+        showLeftSide,
         showMain,
         conversations,
         setConversations,
         setProfiles,
         setSelected,
         setShowRightSide,
+        setShowLeftSide,
         setShowSearchBar,
         setShowMain,
       }}

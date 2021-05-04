@@ -203,7 +203,11 @@ const BottomStyles = styled.div`
 
   @media (max-width: 600px) {
     .writing {
-      font-size: 1.25rem;
+      height: 3rem;
+
+      input {
+        height: 60%;
+      }
     }
   }
 `;

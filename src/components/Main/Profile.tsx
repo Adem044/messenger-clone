@@ -47,6 +47,7 @@ export default function Profile({
       newPrev.forEach((profile) => {
         if (profile.id === id) {
           profile.lastMessage = message;
+          profile.seen = false;
           profile.date = new Date().getTime();
         }
       });
