@@ -20,14 +20,12 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
     const {
       conversations,
       profiles,
-      setConversations,
-      setProfiles,
+      addToConversation,
+      handleProfiles,
       selected,
     } = useContext(MessengerContext);
 
-    const { conversations: conversation, emoji } = conversations?.find(
-      (conv) => conv.id === selected
-    )!;
+    const { emoji } = conversations?.find((conv) => conv.id === selected)!;
 
     const { nickname, profile } = profiles?.find((pro) => pro.id === selected)!;
 
@@ -36,20 +34,12 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
     }, [profile]);
 
     const sortProfiles = (message: string | JSX.Element) => {
-      setProfiles!((prev) => {
-        const newPrev = [...prev];
-        newPrev.forEach((pro) => {
-          if (pro.id === selected) {
-            pro.lastMessage = message;
-            pro.date = new Date().getTime();
-          }
-        });
-        return newPrev.sort((a, b) => {
-          if (a.date! > b.date!) return -1;
-          if (a.date! < b.date!) return 1;
-          return 0;
-        });
-      });
+      handleProfiles!(
+        ["lastMessage", "date"],
+        [message, new Date().getTime()],
+        undefined,
+        true
+      );
     };
 
     const addConversation = (
@@ -64,15 +54,7 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
         hasReply: false,
       };
 
-      setConversations!((prev) => {
-        const newPrev = [...prev];
-        newPrev.forEach((conv) => {
-          if (conv.id === selected) {
-            conv.conversations = [...conversation, newConv];
-          }
-        });
-        return newPrev;
-      });
+      addToConversation!(newConv);
 
       sortProfiles(message);
     };
@@ -91,15 +73,7 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
         replyId: id,
       };
 
-      setConversations!((prev) => {
-        const newPrev = [...prev];
-        newPrev.forEach((conv) => {
-          if (conv.id === selected) {
-            conv.conversations = [...conversation, newMsg];
-          }
-        });
-        return newPrev;
-      });
+      addToConversation!(newMsg);
 
       sortProfiles(message);
     };

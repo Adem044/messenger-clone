@@ -36,7 +36,7 @@ export default function Li({ li, id }: Props) {
   const {
     conversations,
     selected,
-    setConversations,
+    handleConversation,
     setShowSearchBar,
     setShowRightSide,
   } = useContext(MessengerContext);
@@ -58,20 +58,12 @@ export default function Li({ li, id }: Props) {
   }, [selected]);
 
   const setPrevious = () => {
-    if (kindOfModal === "nicknames") {
-    } else {
-      setConversations!((prev) => {
-        const newConv = [...prev];
-        newConv.forEach((conv) => {
-          if (kindOfModal === "colors" && conv.id === selected)
-            conv.theme = prevTheme.current;
-
-          if (kindOfModal === "emojis" && conv.id === selected)
-            conv.emoji = prevEmoji.current;
-        });
-
-        return newConv;
-      });
+    if (kindOfModal !== "nicknames") {
+      if (kindOfModal === "colors") {
+        handleConversation!(["theme"], [prevTheme.current]);
+      } else if (kindOfModal === "emojis") {
+        handleConversation!(["emoji"], [prevEmoji.current]);
+      }
     }
     setShowModal(false);
   };

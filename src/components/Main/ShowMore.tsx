@@ -15,7 +15,9 @@ export default function ShowMore({
   sender,
   setShowForward,
 }: ShowMoreProps) {
-  const { setConversations, selected } = useContext(MessengerContext);
+  const { setConversations, selected, handleSpecificConv } = useContext(
+    MessengerContext
+  );
 
   const removeMsg = (id: number) => {
     setConversations!((prev) => {
@@ -26,15 +28,17 @@ export default function ShowMore({
               conver.msgThatRepliedTo = "Message is removed";
             }
           });
-          conv.conversations[id].isRemoved = true;
-          conv.conversations[id].hasReply = false;
-          conv.conversations[id].message = "Message is removed";
         }
         return conv;
       });
 
       return newPrev;
     });
+    handleSpecificConv!(
+      id,
+      ["isRemoved", "hasReply", "message"],
+      [true, false, "Message is Removed"]
+    );
   };
   return (
     <ShowMoreStyles sender={sender} isRight={isRight}>

@@ -18,45 +18,24 @@ export default function Profile({
   disabled,
   setDisabled,
 }: ProfileProps) {
-  const { conversations, setConversations, setProfiles } = useContext(
-    MessengerContext
-  );
-
-  const { conversations: fixed } = conversations!.find(
-    (conv) => conv.id === id
-  )!;
+  const { addToConversation, handleProfiles } = useContext(MessengerContext);
 
   const handleClick = () => {
-    setConversations!((prev) => {
-      return [...prev].map((conv) => {
-        if (conv.id === id) {
-          const newConv = {
-            sender: "me",
-            message,
-            isRemoved: false,
-            hasReply: false,
-          };
+    const newConv = {
+      sender: "me",
+      message,
+      isRemoved: false,
+      hasReply: false,
+    };
 
-          conv.conversations = [...fixed, newConv];
-        }
-        return conv;
-      });
-    });
-    setProfiles!((prev) => {
-      const newPrev = [...prev];
-      newPrev.forEach((profile) => {
-        if (profile.id === id) {
-          profile.lastMessage = message;
-          profile.seen = false;
-          profile.date = new Date().getTime();
-        }
-      });
-      return newPrev.sort((a, b) => {
-        if (a.date! > b.date!) return -1;
-        if (a.date! < b.date!) return 1;
-        return 0;
-      });
-    });
+    addToConversation!(newConv, id);
+
+    handleProfiles!(
+      ["lastMessage", "seen", "date"],
+      [message, false, new Date().getTime()],
+      id,
+      true
+    );
     setDisabled((prev) => {
       const newPrev = [...prev];
       newPrev[id - 1] = true;

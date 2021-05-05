@@ -16,7 +16,6 @@ import { MessengerContext } from "../../context/context";
 import { Conversations } from "../../context/context";
 import Emojis from "./Emojis";
 import ShowMore from "./ShowMore";
-import useWindowDimensions from "../WindowSize";
 
 interface MediumProps extends Conversations {
   props: {
@@ -64,11 +63,6 @@ export default function Medium({
   useLayoutEffect(() => {
     setIsLeft(ref.current?.offsetWidth! < 85);
     setIsRight(ref.current?.offsetWidth! > 235);
-
-    console.log(
-      divTag.current?.offsetWidth! < 85,
-      divTag.current?.offsetWidth!
-    );
   }, [message]);
 
   const clasName = sender === "me" ? "right" : `left ${theme}`;

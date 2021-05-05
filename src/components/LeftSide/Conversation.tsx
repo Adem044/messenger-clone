@@ -25,9 +25,9 @@ export default function Conversation({
   const {
     selected,
     setSelected,
-    setProfiles,
     setShowMain,
     setShowLeftSide,
+    handleProfiles,
   } = useContext(MessengerContext);
 
   const { width } = useWindowDimensions();
@@ -41,15 +41,8 @@ export default function Conversation({
   const handleClick = () => {
     setSelected!(id);
     setShowMain!(true);
-    setProfiles!((prev) => {
-      const newPrev = prev.map((pro) => {
-        if (pro.id === id) {
-          pro.seen = true;
-        }
-        return pro;
-      });
-      return newPrev;
-    });
+
+    handleProfiles!(["seen"], [true], id);
 
     if (width < 600) setShowLeftSide!(false);
   };

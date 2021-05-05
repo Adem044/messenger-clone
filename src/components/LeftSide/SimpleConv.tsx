@@ -16,24 +16,20 @@ export default function SimpleConv({
   id,
   setSearch,
 }: SimpleConvProps) {
-  const { setSelected, setShowMain, setProfiles, setShowLeftSide } = useContext(
-    MessengerContext
-  );
+  const {
+    setSelected,
+    setShowMain,
+    setShowLeftSide,
+    handleProfiles,
+  } = useContext(MessengerContext);
 
   const { width } = useWindowDimensions();
 
   const handleClick = () => {
     setSelected!(id);
     setShowMain!(true);
-    setProfiles!((prev) => {
-      const newPrev = prev.map((pro) => {
-        if (pro.id === id) {
-          pro.seen = true;
-        }
-        return pro;
-      });
-      return newPrev;
-    });
+
+    handleProfiles!(["seen"], [true], id);
 
     if (width < 600) setShowLeftSide!(false);
     setSearch("");

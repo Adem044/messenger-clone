@@ -6,26 +6,19 @@ interface Props {
 }
 
 export default function Picker({ kind }: Props) {
-  const { selected, setConversations, conversations } = useContext(
+  const { selected, conversations, handleConversation } = useContext(
     MessengerContext
   );
 
   const { theme, emoji } = conversations?.find((conv) => conv.id === selected)!;
 
-  const handleClick = (isCurString: boolean, cur: string | JSX.Element) =>
-    setConversations!((prev) => {
-      const prevConv = [...prev];
-      prevConv.forEach((conv) => {
-        if (conv.id === selected) {
-          if (isCurString) {
-            conv.theme = cur as string;
-          } else {
-            conv.emoji = cur as JSX.Element;
-          }
-        }
-      });
-      return prevConv;
-    });
+  const handleClick = (isCurString: boolean, cur: string | JSX.Element) => {
+    if (isCurString) {
+      handleConversation!(["theme"], [cur]);
+    } else {
+      handleConversation!(["emoji"], [cur]);
+    }
+  };
   return (
     <div className="picker">
       {kind.map((cur, i) => {

@@ -4,19 +4,10 @@ import { MessengerContext } from "../../context/context";
 import Edit from "./Edit";
 
 export default function EditNicknames() {
-  const { setProfiles, selected } = useContext(MessengerContext);
+  const { handleProfiles } = useContext(MessengerContext);
 
   const changeProfileName = (profile: string) => {
-    setProfiles!((prev) => {
-      const newProfiles = [...prev];
-      return newProfiles.map((cur) => {
-        if (cur.id === selected!) {
-          cur.nickname = profile;
-        }
-
-        return cur;
-      });
-    });
+    handleProfiles!(["nickname"], [profile]);
   };
   return (
     <div className="nicknames">

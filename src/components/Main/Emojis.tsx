@@ -11,18 +11,10 @@ interface EmojisProps extends UlProps {
 }
 
 export default function Emojis({ sender, isLeft, id }: EmojisProps) {
-  const { setConversations, selected } = useContext(MessengerContext);
+  const { handleSpecificConv } = useContext(MessengerContext);
 
   const setReaction = (id: number, reaction: JSX.Element) => {
-    setConversations!((prev) => {
-      const newPrev = prev.map((conv) => {
-        if (conv.id === selected) {
-          conv.conversations[id].reaction = reaction;
-        }
-        return conv;
-      });
-      return newPrev;
-    });
+    handleSpecificConv!(id, ["reaction"], [reaction]);
   };
 
   return (
