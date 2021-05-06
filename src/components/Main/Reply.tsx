@@ -70,7 +70,7 @@ const DivTag = styled.div<DivProps>`
 
   @media (max-width: 600px) {
     a {
-      max-width: 100%;
+      max-width: 100% !important;
     }
   }
 `;
