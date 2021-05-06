@@ -18,7 +18,7 @@ const Reply = React.forwardRef<HTMLAnchorElement, ReplyProps>(
         </a>
         <a className="second" id={`${id}`} ref={ref} href="ada">
           {message}
-          <span>{reaction}</span>
+          <span className={reaction ? "reaction" : undefined}>{reaction}</span>
         </a>
       </DivTag>
     );

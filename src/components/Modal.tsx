@@ -48,6 +48,10 @@ const ModalStyles = styled.div`
       padding: 0.25rem;
       display: grid;
 
+      svg {
+        cursor: pointer;
+      }
+
       > span {
         height: 3rem;
         width: 3rem;

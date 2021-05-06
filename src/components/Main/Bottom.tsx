@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { BiSticker } from "react-icons/bi";
+import { BiSticker, BiSend } from "react-icons/bi";
 import { RiFileGifLine } from "react-icons/ri";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import ReplyPopUp from "./ReplyPopUp";
@@ -23,6 +23,7 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
       addToConversation,
       handleProfiles,
       selected,
+      setConversations,
     } = useContext(MessengerContext);
 
     const { emoji } = conversations?.find((conv) => conv.id === selected)!;
@@ -52,7 +53,21 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
         message,
         isRemoved: false,
         hasReply: false,
+        addImg: true,
       };
+
+      setConversations!((prev) => {
+        const newPrev = prev.map((conv) => {
+          if (
+            conv.id === selected &&
+            conv.conversations[conv.conversations.length - 1]?.sender === sender
+          ) {
+            conv.conversations[conv.conversations.length - 1].addImg = false;
+          }
+          return conv;
+        });
+        return newPrev;
+      });
 
       addToConversation!(newConv);
 
@@ -71,6 +86,7 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
         replyTo: sender,
         msgThatRepliedTo: message,
         replyId: id,
+        addImg: true,
       };
 
       addToConversation!(newMsg);
@@ -90,17 +106,29 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
       }
     };
 
+    const handleClick = () => {
+      if (reply) {
+        addReplytoMsg(selectValue, inputValue);
+        setReply(false);
+      } else {
+        addConversation(selectValue, inputValue);
+      }
+      setInputValue("");
+    };
+
     return (
       <BottomStyles>
         {reply && (
           <ReplyPopUp sender={sender} setReply={setReply} message={message} />
         )}
-        <div className="writing">
+        <div className={`writing ${inputValue ? "none" : ""}`}>
           <div className="wrapper">
             <AiOutlinePlusCircle />
-            <HiOutlinePhotograph />
-            <BiSticker />
-            <RiFileGifLine />
+            <div className="inner-wrapper">
+              <HiOutlinePhotograph />
+              <BiSticker />
+              <RiFileGifLine />
+            </div>
           </div>
           <input
             ref={ref}
@@ -122,8 +150,12 @@ const Bottom = React.forwardRef<HTMLInputElement, Props>(
               {nickname ? nickname : profile}
             </option>
           </select>
-          <span onClick={() => addConversation(selectValue, emoji!)}>
-            {emoji}
+          <span
+            onClick={() =>
+              inputValue ? handleClick() : addConversation(selectValue, emoji!)
+            }
+          >
+            {inputValue ? <BiSend /> : emoji}
           </span>
         </div>
       </BottomStyles>
@@ -140,9 +172,16 @@ const BottomStyles = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: whitesmoke;
+  box-shadow: inset 0 1px 0px black, 0px -2.5px 3px #e5e5e5;
   padding: 0 1rem;
 
+  .none {
+    .wrapper {
+      .inner-wrapper {
+        display: none;
+      }
+    }
+  }
   .writing {
     display: flex;
     align-items: center;
@@ -152,10 +191,11 @@ const BottomStyles = styled.div`
     width: 100%;
     color: #06b0ff;
 
-    .wrapper {
+    .wrapper,
+    .inner-wrapper {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.2rem;
     }
 
     span {

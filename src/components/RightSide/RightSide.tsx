@@ -35,7 +35,7 @@ const RightSideStyles = styled.aside<Props>`
   padding: 1rem 1.5rem;
   margin-left: auto;
   flex-basis: 20rem;
-  background-color: lavenderblush;
+  background-color: #f4f4f4;
 
   z-index: ${({ show }) => (show ? "10" : "")};
 

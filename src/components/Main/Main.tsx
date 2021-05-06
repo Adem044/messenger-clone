@@ -75,8 +75,6 @@ const MainStyles = styled.div<Props>`
   position: relative;
   flex-grow: 1;
 
-  /* z-index: ${({ showMain }) => (showMain ? "4" : "-1")}; */
-
   transform: ${({ showMain }) =>
     showMain ? "translateX(0%)" : "translateX(-100%)"};
 
@@ -94,7 +92,6 @@ const MainStyles = styled.div<Props>`
     .medium {
       min-height: 100%;
       width: 100%;
-      background-color: #ede8f1;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;

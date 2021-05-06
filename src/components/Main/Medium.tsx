@@ -8,7 +8,7 @@ import React, {
 import { BiDotsVertical } from "react-icons/bi";
 import { FaReply } from "react-icons/fa";
 import { GrEmoji } from "react-icons/gr";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Modal from "../Modal";
 import Reply from "./Reply";
 import Forward from "./Forward";
@@ -37,6 +37,7 @@ export default function Medium({
   message,
   hasReply,
   isRemoved,
+  addImg,
   reaction,
   replyId,
   msgThatRepliedTo,
@@ -46,14 +47,21 @@ export default function Medium({
   const [showEmojis, setShowEmojis] = useState(false);
   const [showForward, setShowForward] = useState(false);
   const [isLeft, setIsLeft] = useState(true);
-  const [isRight, setIsRight] = useState(false);
 
   const ref = useRef<HTMLAnchorElement>(null);
   const divTag = useRef<HTMLDivElement>(null);
 
-  const { selected, conversations } = useContext(MessengerContext);
+  const { selected, conversations, profiles } = useContext(MessengerContext);
 
   const { theme } = conversations?.find((conv) => conv.id === selected)!;
+
+  const { photo } = profiles?.find((pro) => pro.id === selected)!;
+
+  const img = addImg
+    ? sender === "me"
+      ? "https://randomuser.me/api/portraits/men/40.jpg"
+      : photo
+    : "";
 
   useEffect(() => {
     if (id === length - 1) ref.current?.focus();
@@ -61,8 +69,7 @@ export default function Medium({
   }, []);
 
   useLayoutEffect(() => {
-    setIsLeft(ref.current?.offsetWidth! < 85);
-    setIsRight(ref.current?.offsetWidth! > 235);
+    setIsLeft(ref.current?.offsetWidth! < 65);
   }, [message]);
 
   const clasName = sender === "me" ? "right" : `left ${theme}`;
@@ -81,8 +88,6 @@ export default function Medium({
 
   return (
     <MediumStyles
-      isRight={isRight}
-      sender={sender}
       ref={divTag}
       className={`wrapper ${clasName}`}
       onMouseLeave={() => {
@@ -90,6 +95,7 @@ export default function Medium({
         setShowEmojis(false);
       }}
     >
+      <img src={img} alt="" />
       {hasReply ? (
         <Reply
           ref={ref}
@@ -107,9 +113,10 @@ export default function Medium({
           id={`${id}`}
           href="ada"
           className={isRemoved ? "removed" : ""}
+          title={new Date().toLocaleTimeString()}
         >
           {message}
-          <span>{reaction}</span>
+          <span className={reaction ? "reaction" : undefined}>{reaction}</span>
         </a>
       )}
       <div className="icons">
@@ -135,14 +142,7 @@ export default function Medium({
               setShowEmojis(false);
             }}
           />
-          {showMenu && (
-            <ShowMore
-              sender={sender}
-              isRight={isRight}
-              id={id}
-              setShowForward={setShowForward}
-            />
-          )}
+          {showMenu && <ShowMore id={id} setShowForward={setShowForward} />}
         </div>
       </div>
       {showForward && (
@@ -154,20 +154,20 @@ export default function Medium({
   );
 }
 
-interface Props {
-  isRight: boolean;
-  sender: string;
-}
-
-const MediumStyles = styled.div<Props>`
+const MediumStyles = styled.div`
   display: flex;
-  column-gap: 0.5rem;
+  column-gap: 0.25rem;
   align-items: center;
 
   &:hover {
     .icons {
       display: flex;
     }
+  }
+
+  img {
+    width: 1.25rem;
+    align-self: flex-end;
   }
   a {
     max-width: 30rem;
@@ -176,10 +176,21 @@ const MediumStyles = styled.div<Props>`
     text-decoration: none;
     color: black;
     position: relative;
+    border-radius: 10px;
 
     span {
       position: absolute;
       bottom: -0.5rem;
+
+      &.reaction {
+        background-color: mediumturquoise;
+
+        border-radius: 50%;
+        height: 1.15rem;
+        width: 1.15rem;
+        display: grid;
+        place-items: center;
+      }
     }
   }
 
@@ -194,9 +205,8 @@ const MediumStyles = styled.div<Props>`
   .icons {
     display: none;
     column-gap: 0.25rem;
-    background-color: #b6d8df;
     padding: 0.25rem;
-    border-radius: 10px;
+    color: #b8babc;
 
     svg {
       cursor: pointer;
@@ -231,8 +241,7 @@ const MediumStyles = styled.div<Props>`
     .show-more {
       position: relative;
       display: grid;
-      place-items: ${({ isRight, sender }) =>
-        isRight ? (sender === "me" ? "flex-start" : "flex-end") : "center"};
+      place-items: center;
     }
   }
 
@@ -240,11 +249,10 @@ const MediumStyles = styled.div<Props>`
     align-self: flex-end;
     flex-direction: row-reverse;
     a {
-      border-radius: 10px 0 0 10px;
-      background-color: white;
+      background-color: rgb(228, 230, 235);
 
       span {
-        left: 0.5rem;
+        left: 0.25rem;
       }
     }
     a.removed {
@@ -268,11 +276,10 @@ const MediumStyles = styled.div<Props>`
       align-self: flex-start;
     }
     a {
-      border-radius: 0 10px 10px 0;
       background-color: #0098fe;
 
       span {
-        right: 0.5rem;
+        right: 0.25rem;
       }
     }
     a.removed {
@@ -296,7 +303,7 @@ const MediumStyles = styled.div<Props>`
     max-width: 100%;
 
     a {
-      max-width: 80%;
+      max-width: 70%;
     }
 
     .icons {

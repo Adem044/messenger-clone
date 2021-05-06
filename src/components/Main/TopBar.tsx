@@ -45,6 +45,7 @@ const TopBarStyles = styled.div`
   align-items: center;
   padding: 1rem;
   background-color: white;
+  box-shadow: inset 0 -1px 0px black, 0px 2.5px 3px #e5e5e5;
 
   > span {
     display: none;

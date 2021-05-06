@@ -26,6 +26,7 @@ export default function Profile({
       message,
       isRemoved: false,
       hasReply: false,
+      addImg: true,
     };
 
     addToConversation!(newConv, id);

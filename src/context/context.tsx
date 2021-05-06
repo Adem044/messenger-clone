@@ -27,6 +27,7 @@ export interface Conversations {
   replyTo?: string;
   msgThatRepliedTo?: string | JSX.Element;
   replyId?: number;
+  addImg?: boolean;
 }
 
 interface Context {

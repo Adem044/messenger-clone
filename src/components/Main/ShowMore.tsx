@@ -1,20 +1,13 @@
 import React, { useContext } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { MessengerContext } from "../../context/context";
 
 interface ShowMoreProps {
   id: number;
   setShowForward: React.Dispatch<React.SetStateAction<boolean>>;
-  isRight: boolean;
-  sender: string;
 }
 
-export default function ShowMore({
-  id,
-  isRight,
-  sender,
-  setShowForward,
-}: ShowMoreProps) {
+export default function ShowMore({ id, setShowForward }: ShowMoreProps) {
   const { setConversations, selected, handleSpecificConv } = useContext(
     MessengerContext
   );
@@ -41,19 +34,14 @@ export default function ShowMore({
     );
   };
   return (
-    <ShowMoreStyles sender={sender} isRight={isRight}>
+    <ShowMoreStyles>
       <li onClick={() => removeMsg(id)}>Remove</li>
       <li onClick={() => setShowForward(true)}>Forward</li>
     </ShowMoreStyles>
   );
 }
 
-interface Props {
-  isRight: boolean;
-  sender: string;
-}
-
-const ShowMoreStyles = styled.ul<Props>`
+const ShowMoreStyles = styled.ul`
   top: -2rem;
   background-color: white;
   position: absolute;
@@ -63,30 +51,16 @@ const ShowMoreStyles = styled.ul<Props>`
   padding: 0.25rem;
   border-radius: 5px;
   box-shadow: 2px 2px 5px gray;
+  color: black;
 
   &::after {
     content: "";
     position: absolute;
     border-top: 8px solid white;
-    ${({ isRight, sender }) =>
-      isRight
-        ? sender === "me"
-          ? css`
-              border-left: 8px solid transparent;
-              border-right: 0px solid transparent;
-            `
-          : css`
-              border-left: 0px solid transparent;
-              border-right: 8px solid transparent;
-            `
-        : css`
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-          `}
-
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
     bottom: -0.5rem;
-    left: ${({ isRight, sender }) =>
-      isRight ? (sender === "me" ? "4%" : "96%") : "50%"};
+    left: 50%;
     transform: translateX(-50%);
   }
 
