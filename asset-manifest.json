@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/Adem044/messenger-clone/static/css/main.cbec5aa2.chunk.css",
-    "main.js": "/Adem044/messenger-clone/static/js/main.619f05a6.chunk.js",
-    "main.js.map": "/Adem044/messenger-clone/static/js/main.619f05a6.chunk.js.map",
-    "runtime-main.js": "/Adem044/messenger-clone/static/js/runtime-main.dc19eeea.js",
-    "runtime-main.js.map": "/Adem044/messenger-clone/static/js/runtime-main.dc19eeea.js.map",
-    "static/js/2.2ee4cfea.chunk.js": "/Adem044/messenger-clone/static/js/2.2ee4cfea.chunk.js",
-    "static/js/2.2ee4cfea.chunk.js.map": "/Adem044/messenger-clone/static/js/2.2ee4cfea.chunk.js.map",
-    "static/js/3.bd634f6c.chunk.js": "/Adem044/messenger-clone/static/js/3.bd634f6c.chunk.js",
-    "static/js/3.bd634f6c.chunk.js.map": "/Adem044/messenger-clone/static/js/3.bd634f6c.chunk.js.map",
-    "index.html": "/Adem044/messenger-clone/index.html",
-    "static/css/main.cbec5aa2.chunk.css.map": "/Adem044/messenger-clone/static/css/main.cbec5aa2.chunk.css.map",
-    "static/js/2.2ee4cfea.chunk.js.LICENSE.txt": "/Adem044/messenger-clone/static/js/2.2ee4cfea.chunk.js.LICENSE.txt"
+    "main.css": "/messenger-clone/static/css/main.cbec5aa2.chunk.css",
+    "main.js": "/messenger-clone/static/js/main.619f05a6.chunk.js",
+    "main.js.map": "/messenger-clone/static/js/main.619f05a6.chunk.js.map",
+    "runtime-main.js": "/messenger-clone/static/js/runtime-main.f4841bfd.js",
+    "runtime-main.js.map": "/messenger-clone/static/js/runtime-main.f4841bfd.js.map",
+    "static/js/2.21d59f28.chunk.js": "/messenger-clone/static/js/2.21d59f28.chunk.js",
+    "static/js/2.21d59f28.chunk.js.map": "/messenger-clone/static/js/2.21d59f28.chunk.js.map",
+    "static/js/3.bd634f6c.chunk.js": "/messenger-clone/static/js/3.bd634f6c.chunk.js",
+    "static/js/3.bd634f6c.chunk.js.map": "/messenger-clone/static/js/3.bd634f6c.chunk.js.map",
+    "index.html": "/messenger-clone/index.html",
+    "static/css/main.cbec5aa2.chunk.css.map": "/messenger-clone/static/css/main.cbec5aa2.chunk.css.map",
+    "static/js/2.21d59f28.chunk.js.LICENSE.txt": "/messenger-clone/static/js/2.21d59f28.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.dc19eeea.js",
-    "static/js/2.2ee4cfea.chunk.js",
+    "static/js/runtime-main.f4841bfd.js",
+    "static/js/2.21d59f28.chunk.js",
     "static/css/main.cbec5aa2.chunk.css",
     "static/js/main.619f05a6.chunk.js"
   ]
