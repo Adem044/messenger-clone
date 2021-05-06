@@ -172,6 +172,7 @@ const BottomStyles = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  background-color: white;
   box-shadow: inset 0 1px 0px black, 0px -2.5px 3px #e5e5e5;
   padding: 0 1rem;
 

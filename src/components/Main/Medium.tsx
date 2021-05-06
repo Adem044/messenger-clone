@@ -303,7 +303,7 @@ const MediumStyles = styled.div`
     max-width: 100%;
 
     a {
-      max-width: 70%;
+      max-width: 63%;
     }
 
     .icons {

@@ -36,6 +36,11 @@ const DivTag = styled.div<DivProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  max-width: 63%;
+
+  a {
+    max-width: 100%;
+  }
   a.first {
     background-color: #cecece !important;
     top: 0.65rem;
@@ -61,5 +66,11 @@ const DivTag = styled.div<DivProps>`
 
   a.second {
     width: fit-content;
+  }
+
+  @media (max-width: 600px) {
+    a {
+      max-width: 100%;
+    }
   }
 `;
