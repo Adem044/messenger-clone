@@ -18,8 +18,8 @@ export default function Modal({ children }: Props) {
 }
 
 const ModalStyles = styled.div`
-  position: absolute; // absolute 
-  display: flex; // fixed 
+  position: absolute;
+  display: flex;
   flex-direction: column;
   row-gap: 1rem;
   background-color: white;
