@@ -9,6 +9,8 @@ interface Props {
 }
 
 export default function Modal({ children }: Props) {
+  console.log(children);
+  
   return ReactDOM.createPortal(
     <ModalStyles>{children}</ModalStyles>,
     modalRoot
