@@ -9,8 +9,6 @@ interface Props {
 }
 
 export default function Modal({ children }: Props) {
-  console.log(children);
-  // test test 
   return ReactDOM.createPortal(
     <ModalStyles>{children}</ModalStyles>,
     modalRoot
@@ -18,8 +16,8 @@ export default function Modal({ children }: Props) {
 }
 
 const ModalStyles = styled.div`
-  position: absolute;
-  display: flex;
+  position: absolute; // absolute 
+  display: flex; // fixed 
   flex-direction: column;
   row-gap: 1rem;
   background-color: white;
